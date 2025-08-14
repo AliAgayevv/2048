@@ -7,15 +7,20 @@ const highScore = (document.getElementById("highScore").textContent =
 
 class Game {
   constructor() {
+    // board initial edilir
     this.board = [];
     this.score = 0;
     this.highScore = localStorage.getItem("highScore") || 0;
     this.gameWon = false;
     this.gameOver = false;
+    // Animasiyaları handle etmək üçün (sleep)
     this.isAnimating = false;
+
     this.markForMergeAnimation = [];
 
+    // Boş taxtanı yaratmaq
     this.initializeBoard();
+    // ox klavişləri və mobil swipe üçün event listeners
     this.setupEventListeners();
     this.setupTouchControls();
     this.updateHighScore();
@@ -34,14 +39,17 @@ class Game {
     this.updateDisplay();
   }
 
+  // Boş taxta DOM da render edilir
   createBoardDOM() {
     const boardElement = document.getElementById("board");
+    // Köhnə taxta təmizlənir
     boardElement.innerHTML = "";
 
     const containerWidth = Math.min(400, window.innerWidth - 40);
     const cellSize = Math.floor((containerWidth - 50) / 4);
     const gap = Math.max(5, Math.floor(cellSize * 0.1));
 
+    // Taxtanın dizaynı, grid istifadə edirəm
     const boardSize = BOARD_SIZE * cellSize + (BOARD_SIZE + 1) * gap;
     boardElement.style.width = `${boardSize}px`;
     boardElement.style.height = `${boardSize}px`;
@@ -53,6 +61,7 @@ class Game {
     document.documentElement.style.setProperty("--cell-size", `${cellSize}px`);
     document.documentElement.style.setProperty("--gap-size", `${gap}px`);
 
+    // 16 ədəd boş hücrə yaradılır
     for (let i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
@@ -362,7 +371,10 @@ class Game {
         for (let j = 0; j < BOARD_SIZE; j++) {
           if (this.board[i][j] === 2048) {
             this.gameWon = true;
-            this.showMessage("Kazandınız! 🎉", "2048'e ulaştınız! Tebrikler!");
+            this.showMessage(
+              "Təbriklər! 🎉",
+              "2048'ə çatdığınız üçün oyunu siz qazandız!"
+            );
             return;
           }
         }
@@ -371,7 +383,7 @@ class Game {
 
     if (!this.canMove()) {
       this.gameOver = true;
-      this.showMessage("Oyun Bitti! 😞", "Daha fazla hamle yapamıyorsunuz.");
+      this.showMessage("Uduzdun! 😞");
     }
   }
 
