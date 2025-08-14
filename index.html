@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 by Ali</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>2048</h1>
+
+        <div class="score-container">
+            <div class="score-box">
+                Xal: <span id="score">0</span>
+            </div>
+            <div class="score-box">
+                Ən yüksək xal: <span id="highScore">0</span>
+            </div>
+        </div>
+
+        <button id="startGame">Oyuna başla</button>
+        <button id="restartGame" style="display: none;">Yenidən başla</button>
+
+        <div class="instructions">
+            <span class="desktop-instruction">Ox klavişlərindən istifadə edərək hücrələri hərəkət etdirin.</span>
+            <span class="mobile-instruction">Parmağınızla sürüşdürərək hücrələri hərəkət etdirin.</span>
+            <br>
+            Eyni rəqəmləri birləşdirərək 2048 ə çatmağa çalışın
+        </div>
+
+        <div id="board"></div>
+
+
+    </div>
+
+
+    <div id="gameMessage" class="game-message">
+        <div class="game-message-content">
+            <h2 id="messageTitle"></h2>
+            <p id="messageText"></p>
+            <button id="tryAgain">Təzədən başla</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
